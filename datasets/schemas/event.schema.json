@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sentinel.example/schemas/event-1.0.json",
+  "title": "Sentinel Synthetic Security Event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["eventId", "tenantId", "eventType", "schemaVersion", "occurredAt", "accountRef", "attributes"],
+  "properties": {
+    "eventId": {"type":"string","pattern":"^evt_demo_[0-9]+$"},
+    "tenantId": {"type":"string","pattern":"^tenant_demo_[a-z]+$"},
+    "eventType": {"type":"string","enum":["auth.login.success","auth.login.failed","device.registered","profile.changed","coupon.redeemed","audit.note"]},
+    "schemaVersion": {"const":"1.0"},
+    "occurredAt": {"type":"string","format":"date-time"},
+    "accountRef": {"type":"string","pattern":"^acct_demo_[0-9]+$"},
+    "deviceRef": {"type":"string","pattern":"^dev_demo_[0-9]+$"},
+    "sourceRef": {"type":"string","pattern":"^src_demo_[0-9]+$"},
+    "attributes": {"type":"object","additionalProperties":true}
+  }
+}

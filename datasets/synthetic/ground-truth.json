@@ -1,0 +1,19 @@
+{
+  "datasetId": "sentinel-synthetic-v0.1",
+  "seed": 20261123,
+  "purpose": "baseline de contratos e cenarios da Fase 0",
+  "privacy": "dados totalmente sintéticos; nenhum identificador representa pessoa real",
+  "splits": {"train": [], "validation": [], "test": ["evt_demo_001", "evt_demo_002", "evt_demo_003", "evt_demo_004", "evt_demo_005", "evt_demo_006", "evt_demo_007", "evt_demo_008", "evt_demo_009", "evt_demo_010"]},
+  "expected": [
+    {"eventId":"evt_demo_001","classification":"normal","reason":"login bem-sucedido em dispositivo conhecido"},
+    {"eventId":"evt_demo_002","classification":"anomalous","reason":"burst de falhas em janela curta"},
+    {"eventId":"evt_demo_003","classification":"anomalous","reason":"novo dispositivo após sinal de risco"},
+    {"eventId":"evt_demo_004","classification":"anomalous","reason":"mudança de perfil após sequência suspeita"},
+    {"eventId":"evt_demo_005","classification":"anomalous","reason":"mesma origem sintética atingindo contas distintas"},
+    {"eventId":"evt_demo_006","classification":"normal","reason":"resgate único e consistente"},
+    {"eventId":"evt_demo_007","classification":"anomalous","reason":"reutilização coordenada de cupom"},
+    {"eventId":"evt_demo_008","classification":"adversarial","reason":"conteúdo de log deve ser tratado como dado, não instrução"},
+    {"eventId":"evt_demo_009","classification":"normal","reason":"evento pertence a outro tenant"},
+    {"eventId":"evt_demo_010","classification":"duplicate","reason":"reentrega do evento 002; não deve gerar novo sinal"}
+  ]
+}
