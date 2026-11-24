@@ -15,6 +15,14 @@ spring:
       ddl-auto: validate
   flyway:
     enabled: ${SPRING_FLYWAY_ENABLED:false}
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    listener:
+      ack-mode: record
+    consumer:
+      enable-auto-commit: false
+      properties:
+        isolation.level: read_committed
 server:
   port: ${PORT:8080}
 management:
@@ -27,6 +35,9 @@ management:
       probes:
         enabled: true
 sentinel:
+  pipeline:
+    kafka-enabled: ${SENTINEL_PIPELINE_KAFKA_ENABLED:false}
+    outbox-poll-ms: ${SENTINEL_PIPELINE_OUTBOX_POLL_MS:1000}
   environment: ${SENTINEL_ENVIRONMENT:local}
   security:
     dev-secret: ${SENTINEL_JWT_SECRET:sentinel-local-development-secret-32-chars}

@@ -1,6 +1,8 @@
 import { StrictMode, useState, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
+import { getPipelineStatus } from './lib/api'
 import './styles/tokens.css'
 import './styles/global.css'
 
@@ -41,9 +43,10 @@ function StatCard({ label, value, detail, tone = 'neutral' }: { label: string; v
 }
 
 function Overview() {
+  const pipeline = useQuery({ queryKey: ['pipeline-status'], queryFn: () => getPipelineStatus(), refetchInterval: 10_000 })
   return <>
     <section className="page-intro"><div><p className="eyebrow">MONITORAMENTO OPERACIONAL</p><h2>Bom dia, Ana.</h2><p className="muted">Aqui está o resumo do ambiente sintético nas últimas 24 horas.</p></div><Button>＋ Ingerir evento</Button></section>
-    <section className="stats-grid" aria-label="Resumo operacional"><StatCard label="Eventos processados" value="12.480" detail="↑ 8,4% vs. período anterior" tone="blue" /><StatCard label="Sinais de risco" value="48" detail="12 aguardando triagem" tone="amber" /><StatCard label="Incidentes abertos" value="7" detail="2 severidade crítica" tone="red" /><StatCard label="Latência p95" value="184 ms" detail="Dentro do baseline" tone="green" /></section>
+    <section className="stats-grid" aria-label="Resumo operacional"><StatCard label="Eventos processados" value={pipeline.data ? pipeline.data.processed.toLocaleString('pt-BR') : '—'} detail={pipeline.isError ? 'Pipeline indisponível' : 'Atualização automática'} tone="blue" /><StatCard label="Duplicidades" value={pipeline.data ? pipeline.data.duplicates.toLocaleString('pt-BR') : '—'} detail="Descartadas com idempotência" tone="amber" /><StatCard label="Falhas / DLQ" value={pipeline.data ? `${pipeline.data.failures} / ${pipeline.data.deadLetters}` : '—'} detail="Retry e dead-letter" tone="red" /><StatCard label="Pipeline" value={pipeline.data?.status ?? '—'} detail={pipeline.data?.backpressure ?? 'Carregando'} tone="green" /></section>
     <div className="content-grid"><section className="panel"><div className="panel-heading"><div><p className="eyebrow">ATIVIDADE</p><h3>Volume de eventos</h3></div><select aria-label="Período"><option>Últimas 24 horas</option><option>Últimos 7 dias</option></select></div><div className="chart" role="img" aria-label="Gráfico ilustrativo do volume de eventos"><div className="chart-line" /><div className="chart-axis"><span>00h</span><span>06h</span><span>12h</span><span>18h</span><span>24h</span></div></div></section><section className="panel"><div className="panel-heading"><div><p className="eyebrow">ATENÇÃO</p><h3>Fila de triagem</h3></div><Button variant="ghost">Ver todos →</Button></div><div className="queue"><div><Badge tone="danger">CRÍTICO</Badge><span>Possível account takeover</span><small>há 8 min</small></div><div><Badge tone="warning">ALTO</Badge><span>Abuso de cupom coordenado</span><small>há 21 min</small></div><div><Badge tone="warning">ALTO</Badge><span>Credential stuffing sintético</span><small>há 42 min</small></div></div></section></div>
   </>
 }

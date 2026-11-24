@@ -6,6 +6,8 @@ spring:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5433/sentinel}
     username: ${SPRING_DATASOURCE_USERNAME:sentinel}
     password: ${SPRING_DATASOURCE_PASSWORD:sentinel_local_only}
+  flyway:
+    enabled: ${SPRING_FLYWAY_ENABLED:true}
 sentinel:
   environment: local
   security:
