@@ -1,0 +1,8 @@
+package com.sentinelai.automation.domain;
+import jakarta.persistence.*; import java.time.Instant; import java.util.UUID;
+@Entity @Table(name="playbook_execution") public class PlaybookExecution {
+ @Id private UUID id; private String tenantId; private String playbookId; private UUID incidentId; private String action; private String impact; private String state; private boolean dryRun; private String idempotencyKey; private String requester; private String reason; @Column(length=4000) private String inputJson; @Column(length=1000) private String result; private Instant createdAt; private Instant updatedAt;
+ protected PlaybookExecution(){} public PlaybookExecution(UUID id,String tenant,String playbook,String action,String impact,String key,String requester,String reason,String input){this.id=id;tenantId=tenant;playbookId=playbook;this.action=action;this.impact=impact;state="REQUESTED";dryRun=true;idempotencyKey=key;this.requester=requester;this.reason=reason;inputJson=input;createdAt=Instant.now();updatedAt=createdAt;}
+ public UUID getId(){return id;} public String getTenantId(){return tenantId;} public String getPlaybookId(){return playbookId;} public String getAction(){return action;} public String getImpact(){return impact;} public String getState(){return state;} public boolean isDryRun(){return dryRun;} public String getIdempotencyKey(){return idempotencyKey;} public String getRequester(){return requester;} public String getReason(){return reason;} public String getResult(){return result;} public Instant getCreatedAt(){return createdAt;} public Instant getUpdatedAt(){return updatedAt;}
+ public void state(String next,String result){state=next;this.result=result;updatedAt=Instant.now();}
+}
