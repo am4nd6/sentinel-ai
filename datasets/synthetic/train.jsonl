@@ -1,0 +1,2 @@
+{"id":"train_001","label":"credential_stuffing","login_attempts":12,"distinct_ips":4}
+{"id":"train_002","label":"normal","login_attempts":2,"distinct_ips":1}
