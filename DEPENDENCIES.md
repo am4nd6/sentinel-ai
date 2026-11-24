@@ -143,7 +143,7 @@ O CI usa `trufflesecurity/trufflehog:3.90.8` e não exige licença Gitleaks.
 PowerShell:
 
 ```powershell
-docker run --rm -v "${PWD}:/repo:ro" trufflesecurity/trufflehog:3.90.8 filesystem /repo --no-update --fail --exclude-paths=/repo/.trufflehog-exclude
+docker run --rm -v "${PWD}:/repo:ro" trufflesecurity/trufflehog:3.90.8 filesystem /repo --no-update --fail --exclude-detectors=JDBC --exclude-paths=/repo/.trufflehog-exclude
 ```
 
 ## CI

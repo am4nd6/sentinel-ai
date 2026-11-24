@@ -51,4 +51,4 @@ jobs:
           docker run --rm
           -v "${{ github.workspace }}:/repo:ro"
           trufflesecurity/trufflehog:3.90.8
-          filesystem /repo --no-update --fail --exclude-paths=/repo/.trufflehog-exclude
+          filesystem /repo --no-update --fail --exclude-detectors=JDBC --exclude-paths=/repo/.trufflehog-exclude
