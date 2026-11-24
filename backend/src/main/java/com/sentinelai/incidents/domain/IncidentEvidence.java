@@ -1,0 +1,3 @@
+package com.sentinelai.incidents.domain;
+import jakarta.persistence.*; import java.time.Instant; import java.util.UUID;
+@Entity @Table(name="incident_evidence") public class IncidentEvidence { @Id private UUID id; private UUID incidentId; private String tenantId; private String eventRef; private String contentHash; private Instant createdAt; protected IncidentEvidence(){} public IncidentEvidence(UUID id,UUID incidentId,String tenantId,String eventRef,String contentHash){this.id=id;this.incidentId=incidentId;this.tenantId=tenantId;this.eventRef=eventRef;this.contentHash=contentHash;this.createdAt=Instant.now();} public String getContentHash(){return contentHash;} }

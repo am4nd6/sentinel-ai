@@ -1,0 +1,2 @@
+create table if not exists incident_comment (id uuid primary key, incident_id uuid not null references incident(id), tenant_id varchar(80) not null references tenant(id), author varchar(160) not null, body varchar(1000) not null, created_at timestamptz not null default now());
+create table if not exists incident_tag (incident_id uuid not null references incident(id), tenant_id varchar(80) not null references tenant(id), tag varchar(80) not null, primary key(incident_id,tag));
