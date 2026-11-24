@@ -2,6 +2,7 @@ package com.sentinelai.common.config;
 
 import java.io.IOException;
 import java.util.UUID;
+import org.slf4j.MDC;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ public class RequestIdFilter extends OncePerRequestFilter {
             requestId = UUID.randomUUID().toString();
         }
         response.setHeader("X-Request-ID", requestId);
-        chain.doFilter(request, response);
+        try { MDC.put("requestId", requestId); chain.doFilter(request, response); }
+        finally { MDC.remove("requestId"); }
     }
 }
