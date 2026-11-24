@@ -1,0 +1,12 @@
+[project]
+name = "sentinel-intelligence"
+version = "0.1.0"
+description = "SENTINEL AI non-privileged intelligence service"
+requires-python = ">=3.13,<3.14"
+dependencies = ["fastapi==0.141.1", "pydantic==2.13.5", "uvicorn[standard]==0.38.0"]
+
+[project.optional-dependencies]
+test = ["pytest==8.4.2", "httpx==0.28.1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

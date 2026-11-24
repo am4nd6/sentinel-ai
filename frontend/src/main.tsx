@@ -1,5 +1,6 @@
 import { StrictMode, useState, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './styles/tokens.css'
 import './styles/global.css'
 
@@ -54,4 +55,5 @@ function Policies() { return <section className="panel page-panel"><div classNam
 
 function App() { const [view, setView] = useState<View>('overview'); return <div className="app-shell"><Sidebar view={view} setView={setView} /><main className="main"><Header view={view} /><div className="page">{view === 'overview' && <Overview />}{view === 'incidents' && <Incidents />}{view === 'events' && <Events />}{view === 'investigation' && <Investigation />}{view === 'policies' && <Policies />}</div></main></div> }
 
-createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>)
+const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 1, staleTime: 30_000 } } })
+createRoot(document.getElementById('root')!).render(<StrictMode><QueryClientProvider client={queryClient}><App /></QueryClientProvider></StrictMode>)
