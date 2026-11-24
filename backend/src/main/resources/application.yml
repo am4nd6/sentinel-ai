@@ -4,6 +4,17 @@ spring:
   mvc:
     problemdetails:
       enabled: true
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/sentinel}
+    username: ${SPRING_DATASOURCE_USERNAME:sentinel}
+    password: ${SPRING_DATASOURCE_PASSWORD:sentinel_local_only}
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: ${SPRING_FLYWAY_ENABLED:false}
 server:
   port: ${PORT:8080}
 management:

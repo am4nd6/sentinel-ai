@@ -118,7 +118,7 @@ PYTHONPATH=src python -m pytest
 
 Imagens usadas:
 
-- PostgreSQL `16-alpine`, porta `5432`.
+- PostgreSQL `16-alpine`, porta local `5433` (container `5432`).
 - Redis `7-alpine`, porta `6379`.
 - Keycloak `26.3`, porta `8081`, somente para OIDC local.
 
