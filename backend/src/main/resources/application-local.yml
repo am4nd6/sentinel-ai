@@ -4,3 +4,5 @@ spring:
       on-profile: local
 sentinel:
   environment: local
+  security:
+    issuer: ${SENTINEL_OIDC_ISSUER:}

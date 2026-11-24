@@ -46,6 +46,7 @@ build/
 .hypothesis/
 playwright-report/
 test-results/
+playwright/.cache/
 
 # IDEs and editors
 .idea/

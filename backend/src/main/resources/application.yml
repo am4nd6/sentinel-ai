@@ -17,3 +17,5 @@ management:
         enabled: true
 sentinel:
   environment: ${SENTINEL_ENVIRONMENT:local}
+  security:
+    dev-secret: ${SENTINEL_JWT_SECRET:sentinel-local-development-secret-32-chars}

@@ -2,7 +2,6 @@
 
 Plataforma demonstrativa de segurança, inteligência antifraude e resposta assistida. O projeto transforma eventos operacionais sintéticos em sinais de risco rastreáveis, incidentes investigáveis e ações seguras regidas por políticas.
 
-> **Status:** Fase 1 — Design system e experiência operacional.
 > **Importante:** este projeto ainda não é um produto de produção. O MVP usa somente dados sintéticos e não executa bloqueios ou ações destrutivas reais.
 
 ## Problema que resolve

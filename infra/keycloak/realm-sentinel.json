@@ -1,0 +1,24 @@
+{
+  "realm": "sentinel",
+  "enabled": true,
+  "displayName": "SENTINEL AI Local",
+  "clients": [{
+    "clientId": "sentinel-frontend",
+    "enabled": true,
+    "publicClient": true,
+    "redirectUris": ["http://localhost:5173/auth/callback", "http://127.0.0.1:4173/auth/callback"],
+    "webOrigins": ["http://localhost:5173", "http://127.0.0.1:4173"],
+    "standardFlowEnabled": true,
+    "directAccessGrantsEnabled": false
+  }],
+  "roles": {"realm": [{"name":"ADMIN"},{"name":"ANALYST"},{"name":"AUDITOR"},{"name":"VIEWER"}]},
+  "users": [{
+    "username": "analyst-demo",
+    "enabled": true,
+    "emailVerified": true,
+    "firstName": "Analista",
+    "lastName": "Demo",
+    "credentials": [{"type":"password","value":"analyst_local_only","temporary":false}],
+    "realmRoles": ["ANALYST"]
+  }]
+}

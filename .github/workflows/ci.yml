@@ -45,4 +45,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: gitleaks/gitleaks-action@v2
+      # Use a standalone scanner; gitleaks-action now requires a paid license.
+      - name: Scan repository for secrets
+        run: >-
+          docker run --rm
+          -v "${{ github.workspace }}:/repo:ro"
+          trufflesecurity/trufflehog:3.90.8
+          filesystem /repo --no-update --fail --exclude-paths=/repo/.trufflehog-exclude
