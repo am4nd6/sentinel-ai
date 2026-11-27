@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, ReactNode, SelectHTMLAttributes } from 'react'
+import { useEffect, useRef, useState, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes } from 'react'
 
 export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
   return <input {...props} />
@@ -6,6 +6,21 @@ export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
 
 export function Select({ children, ...props }: SelectHTMLAttributes<HTMLSelectElement> & { children: ReactNode }) {
   return <select {...props}>{children}</select>
+}
+
+export type DropdownOption = { label: string; value: string }
+
+export function Dropdown({ label, options, value, onChange }: { label: string; options: DropdownOption[]; value?: string; onChange?: (value: string) => void }) {
+  const [open, setOpen] = useState(false)
+  const [internalValue, setInternalValue] = useState(value ?? options[0]?.value)
+  const ref = useRef<HTMLDivElement>(null)
+  const currentValue = value ?? internalValue
+  const selected = options.find(option => option.value === currentValue) ?? options[0]
+  useEffect(() => { const close = (event: MouseEvent) => { if (!ref.current?.contains(event.target as Node)) setOpen(false) }; document.addEventListener('mousedown', close); return () => document.removeEventListener('mousedown', close) }, [])
+  return <div className={`dropdown ${open ? 'is-open' : ''}`} ref={ref}>
+    <button type="button" className="dropdown-trigger" aria-haspopup="listbox" aria-expanded={open} aria-label={label} onClick={() => setOpen(current => !current)}><span>{selected?.label ?? label}</span></button>
+    {open && <div className="dropdown-menu" role="listbox" aria-label={label}>{options.map(option => <button type="button" role="option" aria-selected={option.value === selected?.value} className={option.value === selected?.value ? 'selected' : ''} key={option.value} onClick={() => { setInternalValue(option.value); onChange?.(option.value); setOpen(false) }}>{option.label}</button>)}</div>}
+  </div>
 }
 
 export function Skeleton({ width = '100%' }: { width?: string }) {

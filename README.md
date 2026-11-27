@@ -1,3 +1,5 @@
+> **🚧 Em desenvolvimento:** este projeto está em desenvolvimento e pode sofrer alterações.
+
 # SENTINEL AI
 
 Plataforma demonstrativa de segurança, inteligência antifraude e resposta assistida. O projeto transforma eventos operacionais sintéticos em sinais de risco rastreáveis, incidentes investigáveis e ações seguras regidas por políticas.
